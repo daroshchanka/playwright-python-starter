@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "playwright-python-starter"
+version = "0.1.0"
+description = "Playwright Python test automation project boilerplate including packages structure, reporting, logging, multi-env run configuration for WEB and API test automation."
+authors = ["Max Daroshchanka <daroshchanka@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+playwright = "^1.47.0"
+pytest = "^8.3.3"
+allure-pytest = "^2.13.5"
+pytest-playwright = "^0.5.2"
+faker = "^30.0.0"
+configparser = "^7.1.0"
+pyyaml = "^6.0.2"
+pytest-xdist = "^3.6.1"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+    "--clean-alluredir",
+]
+pythonpath = [
+    ".", "src",
+]
+log_format = "%(asctime)s [%(levelname)-5s] - [%(threadName)s] - (%(filename)s).%(funcName)s(%(lineno)d) - %(message)s"
+log_date_format = "%Y-%m-%d %H:%M:%S"
+log_cli = true
+log_cli_level = "DEBUG"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

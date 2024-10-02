@@ -1,0 +1,47 @@
+base:
+  launch_args: &base_launch_args
+    #https://playwright.dev/python/docs/api/class-browsertype#browser-type-launch
+    slow_mo: 100
+  browser_context_args: &browser_context_args
+    #https://playwright.dev/python/docs/api/class-browser#browser-new-context
+    viewport:
+      width: 1920
+      height: 1080
+    extra_http_headers: #workaround for HeadlessChrome not to be passing automatically
+      user-agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36'
+
+projects:
+  - name: 'chrome'
+    type: 'chromium'
+    launch_args: &chromium_launch_args
+      <<: *base_launch_args
+      channel: 'chrome'
+      args:
+        - '--disable-dev-shm-usage'
+        - '--disable-blink-features=AutomationControlled'
+      ignore_default_args:
+        - '--disable-component-extensions-with-background-pages'
+    browser_context_args:
+      <<: *browser_context_args
+
+  - name: 'webkit'
+    type: 'webkit'
+    launch_args:
+      <<: *base_launch_args
+    browser_context_args:
+      <<: *browser_context_args
+
+  - name: 'firefox'
+    type: 'firefox'
+    launch_args:
+      <<: *base_launch_args
+    browser_context_args:
+      <<: *browser_context_args
+
+  - name: 'msedge'
+    type: 'chromium'
+    launch_args:
+      <<: *chromium_launch_args
+      channel: 'msedge'
+    browser_context_args:
+      <<: *browser_context_args
