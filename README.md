@@ -20,22 +20,22 @@ less-verbose in tests.
 ### Project Structure
 
 - `src/core`  - project-agnostic code, common for any product/project to be automated
-- `src/project`  - project-specific base code, including objects and utils for the particular project (pageobjects for
+- `src/project`  - project-specific base code, including objects and utils for the particular project (page-objects for
   web, services for api, utils, data generators, etc.)
-- `tests` - project test specs, grouped by directories, components, etc. also test config definition is there (base
+- `tests` - project test specs, grouped by directories, components, etc. also test config definition is there (base urls, etc.)
 - `conf` - tests configuration files to be used to initialize classes/fixtures
 - `output` - not a part of git repository, but all outputs collected here (reports, data captured, etc.)
 
 ### Quick Start
 
-Install dependencies:
+_Install dependencies_:
 
 - `pip install poetry`
 - `poetry install`
 - `poetry run playwright install`
 - `npm install -g allure-commandline`
 
-Run test and vew test report:
+_Run test and view test report_:
 
 - `poetry run pytest tests/test_health_check.py --alluredir output/allure-results`
 - `allure serve output/allure-results`
@@ -59,12 +59,12 @@ poetry run pytest -n 2 tests/booking --project=chrome --ENV=dev --headed --allur
 
 #### Reporting
 
-Allure report used.
+Allure report used (allure-pytest plugin).
 Customization added to attach text logs + screenshot per each test.
 
 - `allure generate output/allure-results --clean --output output/allure-report` - will
   generate static report to `output/allure-report` (for CI)
-- `allure serve output/allure-results` - will generate report to temp directory and will open it in browser (local).
+- `allure serve output/allure-results` - will generate report to temp directory and will open it in browser (for local usage)
 
 ![](.assets/web-report-example.png)
 ![](.assets/api-report-example.png)
@@ -151,16 +151,16 @@ Unknown or missing env value will be mapped to `dev`.
 
 _Example_:
 
-```yaml
-[ dev ]
+```ini
+[dev]
 api_base_url= https://www.api.booking-dev.com
 web_base_url= https://www.booking-dev.com
 
-[ qa ]
+[qa]
 api_base_url= https://www.api.booking-qa.com
 web_base_url= https://www.booking-qa.com
 
-[ stage ]
+[stage]
 api_base_url= https://www.api.booking-stage.com
 web_base_url= https://www.booking-stage.com
 ```
@@ -200,14 +200,14 @@ class BookingConfigs:
 Some of [playwright-pytest args](https://playwright.dev/python/docs/test-runners#cli-arguments) 
 are ignored in this project and replaced by the above provided [cli-args](#Pytest-CLI-args):
 
-- setting next args will not take effect at all:
+- setting the next args will not take effect at all:
   ```text
   --browser
   --browser-channel
   --device
   ```
 
-- setting next args will not cause data attached to the Allure test-report (all those traces data will be collected independently):
+- setting the next args will not cause the data attached to the Allure test-report (all those traces data will be collected independently):
   ```text
   --output
   --tracing
